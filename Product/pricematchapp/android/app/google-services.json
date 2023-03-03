@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "486238586301",
+    "project_id": "pricematch-8c4cc",
+    "storage_bucket": "pricematch-8c4cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486238586301:android:593bfd196836728d6a3ed4",
+        "android_client_info": {
+          "package_name": "com.example.pricematchapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486238586301-k56d3l1kntu7j6obfcr6j9f4r4ngcedt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRjyQ5x8chR3NmvKRiZcPAEYpV1jq4o3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486238586301-k56d3l1kntu7j6obfcr6j9f4r4ngcedt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

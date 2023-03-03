@@ -22,6 +22,7 @@ class Map<K, V> {
     _bucket.elementAt(i).setNode(key, value);
   }
 
+//instead use recursion here
   void getBucket() {
     for (int i = 0; i < _bucket.length; i++) {
       print(_bucket.elementAt(i));
