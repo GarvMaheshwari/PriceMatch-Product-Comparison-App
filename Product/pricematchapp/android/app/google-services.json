@@ -29,6 +29,13 @@
             {
               "client_id": "486238586301-k56d3l1kntu7j6obfcr6j9f4r4ngcedt.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "486238586301-uo0qp80tk2vjduhk8pbippcrcnt92f1s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pricematchapp"
+              }
             }
           ]
         }

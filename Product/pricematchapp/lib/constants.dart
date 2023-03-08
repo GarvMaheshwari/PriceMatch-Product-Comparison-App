@@ -18,12 +18,6 @@ class customTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
         controller: controller,
-        // validator: (String ) {
-        //   if (value.isEmpty) {
-        //     return errorMessage;
-        //   }
-        //   return null;
-        // },
         decoration: InputDecoration(
           prefixIcon: Icon(name),
           hintText: hintText,

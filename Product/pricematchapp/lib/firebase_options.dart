@@ -13,7 +13,7 @@ import 'package:flutter/foundation.dart'
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
-/// ```
+///
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -67,7 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '486238586301',
     projectId: 'pricematch-8c4cc',
     storageBucket: 'pricematch-8c4cc.appspot.com',
-    iosClientId: '486238586301-uo0qp80tk2vjduhk8pbippcrcnt92f1s.apps.googleusercontent.com',
+    iosClientId:
+        '486238586301-uo0qp80tk2vjduhk8pbippcrcnt92f1s.apps.googleusercontent.com',
     iosBundleId: 'com.example.pricematchapp',
   );
 
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '486238586301',
     projectId: 'pricematch-8c4cc',
     storageBucket: 'pricematch-8c4cc.appspot.com',
-    iosClientId: '486238586301-uo0qp80tk2vjduhk8pbippcrcnt92f1s.apps.googleusercontent.com',
+    iosClientId:
+        '486238586301-uo0qp80tk2vjduhk8pbippcrcnt92f1s.apps.googleusercontent.com',
     iosBundleId: 'com.example.pricematchapp',
   );
 }

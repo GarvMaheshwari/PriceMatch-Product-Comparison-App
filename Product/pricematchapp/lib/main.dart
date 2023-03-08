@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'signup.dart';
 import 'constants.dart' as constants;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
+                                width: 400,
                                 //Username field:
                                 child: constants.customTextFormField(
                                     controller: username,
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
                               SizedBox(height: 20.0),
                               //Password field
                               Container(
+                                width: 400,
                                 child: constants.customTextFormField(
                                   controller: password,
                                   hintText: "password",
@@ -111,6 +114,11 @@ class MyApp extends StatelessWidget {
                                         ),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SignUp()));
                                             // viewModel.routeToSignUpView();
                                           }),
                                   )
