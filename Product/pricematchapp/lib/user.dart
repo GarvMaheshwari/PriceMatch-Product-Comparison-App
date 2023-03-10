@@ -1,17 +1,15 @@
-import 'dart:ffi';
-
 import 'Map.dart';
 
 class User {
   late String _name;
   late String _email;
-  late Map<String, Double> _PriceWatchList;
+  late Map<String, double> _PriceWatchList;
   late String _uID;
 
   User(String name, String email, String uID) {
     _name = name;
     _email = email;
-    _PriceWatchList = Map<String, Double>();
+    _PriceWatchList = Map<String, double>();
     _uID = uID;
   }
 
