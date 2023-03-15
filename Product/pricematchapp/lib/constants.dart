@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'signup.dart';
 import 'package:pricematchapp/mainMenu.dart';
+import 'user.dart';
 
 class customTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -49,4 +49,8 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+}
+
+class UserStack {
+  static late User user;
 }

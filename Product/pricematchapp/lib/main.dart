@@ -16,8 +16,9 @@ void main() async {
 }
 
 class Login extends StatelessWidget {
-  final TextEditingController username =
-      TextEditingController(); //Creating the text editing controller objects - allows me to store whatever input is typed into the textfields.
+  final TextEditingController username = TextEditingController();
+  //Creating the text editing controller objects
+  //allows me to store whatever input is typed into the textfields.
   final TextEditingController password = TextEditingController();
   final _userFormKey = GlobalKey<FormState>();
   final firebaseAuth = new Auth();
@@ -88,6 +89,8 @@ class Login extends StatelessWidget {
                               SizedBox(height: 10.0),
                               CupertinoButton(
                                   onPressed: () async {
+                                    firebaseAuth.loginUser(
+                                        username.text, password.text, context);
                                     // if (_userFormKey.currentState
                                     //     .validate()) {
                                     //   //Calls login method created in Auth_Service
