@@ -29,6 +29,18 @@ class Auth {
             context: context,
             titleText: "Error",
             messageText: 'Whoops user doesn\'t exist');
+      }
+      if (email.isEmpty || password.isEmpty) {
+        return _showErrorDialog(
+            context: context,
+            titleText: "Error",
+            messageText: "Please enter credentials");
+      }
+      if (!email.contains('@')) {
+        return _showErrorDialog(
+            context: context,
+            titleText: "Error",
+            messageText: "Please enter an email");
       } else if (e.code == 'wrong-password') {
         return _showErrorDialog(
             context: context,

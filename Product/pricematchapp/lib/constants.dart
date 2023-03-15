@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Login(),
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/signup': (context) => SignUp(),
-        '/mainMenu': (context) => const MainMenu(),
+        '/mainMenu': (context) => MainMenu(),
       },
     );
   }
@@ -53,4 +53,6 @@ class MyApp extends StatelessWidget {
 
 class UserStack {
   static late User user;
+  static String productAPI =
+      "https://api.rainforestapi.com/request?api_key=5C0DA93CDB0B4890A388CA240A615086&type=search&amazon_domain=amazon.com";
 }
