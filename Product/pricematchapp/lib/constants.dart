@@ -53,6 +53,6 @@ class MyApp extends StatelessWidget {
 
 class UserStack {
   static late User user;
-  static String productAPI =
+  static String AmazonProductAPI =
       "https://api.rainforestapi.com/request?api_key=5C0DA93CDB0B4890A388CA240A615086&type=search&amazon_domain=amazon.com";
 }
