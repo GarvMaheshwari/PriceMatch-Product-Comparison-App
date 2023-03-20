@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class MainMenu extends StatefulWidget {
   MainMenu({super.key});
 
   static Map<String, dynamic> json = {};
+  static Map<String, dynamic> json2 = {};
+  static bool _isLoadingData = false;
 
   @override
   State<MainMenu> createState() => _MainMenuState();
@@ -26,58 +29,73 @@ class _MainMenuState extends State<MainMenu> {
     return Scaffold(
       appBar: AppBar(
         title: constants.customTextFormField(
-            controller: searchMenu,
-            hintText: "Search for Item",
-            errorMessage: "",
-            name: Icons.search),
+          controller: searchMenu,
+          hintText: "Search for Item",
+          errorMessage: "",
+        ),
+        leading: IconButton(
+          icon: const Icon(CupertinoIcons.search),
+          padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          onPressed: () {
+            String url = appendAmazonSearch(parseInput(searchMenu.text));
+            String url2 = appendWalmartSearch(parseInput(searchMenu.text));
+            //edit this so it instead takes the search input from the controller
+            fetchFromAmazonApi(Uri.parse(url));
+            fetchFromWalmartApi(Uri.parse(url2));
+          },
+        ),
         centerTitle: true,
         toolbarHeight: 60,
         automaticallyImplyLeading: false,
         backgroundColor: Color(0xFF185E83),
       ),
-      body: Column(
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              String url = appendSearch(parseInput(searchMenu
-                  .text)); //edit this so it instead takes the search input from the controller
-              fetchFromApi(Uri.parse(url));
-            },
-          ),
-          const SizedBox(height: 100),
-          // Padding(
-          //   padding: const EdgeInsets.all(20.0),
-          //     child: ListView.builder(
-          //         shrinkWrap: true,
-          //         scrollDirection: Axis.vertical,
-          //         itemCount: Product.currentProductList.length,
-          //         itemBuilder: (context, i) {
-          //           final product = Product.currentProductList[i];
-          //           return Text("Link: ${product.link}");
-          //         }),
-          //   ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: Product.currentProductList.length,
-                itemBuilder: (context, i) {
-                  final product = Product.currentProductList[i];
-                  return Card(
-                    margin:
-                        const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                    child: ListTile(
-                        subtitle: RichText(
-                      text: TextSpan(
-                          text: "Link to Retailer Website",
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () async {
-                              await launchUrl(Uri.parse(product.link));
-                            }),
-                    )),
-                  );
-                }),
-          ),
-        ],
-      ),
+      body: MainMenu._isLoadingData
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 100),
+                Expanded(
+                  child: Container(
+                    width: 800,
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                        itemCount: Product.currentProductList.length,
+                        itemBuilder: (context, i) {
+                          final product = Product.currentProductList[i];
+                          return Card(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 10),
+                            child: Stack(
+                              children: [
+                                Image.network(
+                                  product.image,
+                                  height: 200,
+                                  width: 200,
+                                ),
+                                ListTile(
+                                    title: Text(
+                                      "Retailer\n${product.brand} \n\$${product.rawPrice}",
+                                      textAlign: TextAlign.right,
+                                    ),
+                                    subtitle: RichText(
+                                      textAlign: TextAlign.right,
+                                      text: TextSpan(
+                                          text: "Link to Retail Website",
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () async {
+                                              await launchUrl(
+                                                  Uri.parse(product.link));
+                                            }),
+                                    )),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+              ],
+            ),
     );
   }
 
@@ -86,7 +104,7 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   //Append Search is a method that contains the API url with the key. This appends
-  String appendSearch(List<String> searchInput) {
+  String appendAmazonSearch(List<String> searchInput) {
     String appendedURL = constants.UserStack.AmazonProductAPI + "&search_term=";
     appendedURL = "$appendedURL${searchInput[0]}";
 
@@ -100,12 +118,47 @@ class _MainMenuState extends State<MainMenu> {
     return appendedURL;
   }
 
-  void fetchFromApi(Uri url) async {
+  // https://api.bluecartapi.com/request?api_key=FE30BB06594B41229F17F6C50CA80208&search_term=graphics+card
+  // &type=search&sort_by=price_low_to_high&output=json
+
+  String appendWalmartSearch(List<String> searchInput) {
+    String appendedURL = constants.UserStack.WalmartProductAPI;
+    appendedURL = "$appendedURL${searchInput[0]}";
+
+    if (searchInput.length > 1) {
+      for (int i = 1; i < searchInput.length; i++) {
+        appendedURL = "$appendedURL+${searchInput[i]}";
+      }
+    }
+    appendedURL =
+        "$appendedURL&type=search&sort_by=price_low_to_high&output=json";
+    print("$appendedURL"); // remove this
+    return appendedURL;
+  }
+
+  void fetchFromAmazonApi(Uri url) async {
+    setState(() {
+      MainMenu._isLoadingData = true;
+    });
     var response = await http.get(url);
     String data = response.body;
     MainMenu.json.addAll(jsonDecode(data));
     setState(() {
+      MainMenu._isLoadingData = false;
       Product.getAmazonProductsList(MainMenu.json);
+    });
+  }
+
+  void fetchFromWalmartApi(Uri url) async {
+    setState(() {
+      MainMenu._isLoadingData = true;
+    });
+    var response = await http.get(url);
+    String data = response.body;
+    MainMenu.json2.addAll(jsonDecode(data));
+    setState(() {
+      MainMenu._isLoadingData = false;
+      Product.getWalmartProductsList(MainMenu.json2);
     });
   }
 }

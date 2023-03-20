@@ -8,13 +8,15 @@ class customTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final String errorMessage;
-  final IconData name;
+  final IconData? name;
+  final Color? textColor;
 
   customTextFormField({
     required this.controller,
     required this.hintText,
     required this.errorMessage,
-    required this.name,
+    this.name,
+    this.textColor,
   });
 
   @override
@@ -54,5 +56,7 @@ class MyApp extends StatelessWidget {
 class UserStack {
   static late User user;
   static String AmazonProductAPI =
-      "https://api.rainforestapi.com/request?api_key=5C0DA93CDB0B4890A388CA240A615086&type=search&amazon_domain=amazon.com";
+      "https://api.rainforestapi.com/request?api_key=A5E0E234821C45968357BB158E4F67FD&type=search&amazon_domain=amazon.com";
+  static String WalmartProductAPI =
+      "https://api.bluecartapi.com/request?api_key=FE30BB06594B41229F17F6C50CA80208&search_term=";
 }
