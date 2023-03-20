@@ -19,6 +19,8 @@ class customTextFormField extends StatelessWidget {
     this.textColor,
   });
 
+  //custom formField widget that simplifies the calling of the customformfield
+  //widget in the other files.
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -53,6 +55,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//Houses the important static variables used by most of the other classes.
 class UserStack {
   static late User user;
   static String AmazonProductAPI =

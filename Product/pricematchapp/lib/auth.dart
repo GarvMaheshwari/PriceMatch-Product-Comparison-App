@@ -7,7 +7,7 @@ class Auth {
   final FirebaseAuth authService = FirebaseAuth.instance;
 
   late BuildContext context;
-
+//Registers User in both Firebase and locally.
   Future registerUser(
       email, password, String firstName, String lastName) async {
     await authService.createUserWithEmailAndPassword(
@@ -17,6 +17,7 @@ class Auth {
     constants.UserStack.user = tempUser;
   }
 
+//Method that is responsible for verifying User Logins.
   Future loginUser(String email, String password, BuildContext context) async {
     try {
       await authService.signInWithEmailAndPassword(

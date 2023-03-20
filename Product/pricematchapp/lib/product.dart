@@ -38,10 +38,10 @@ class Product {
   //   return Product.priceRaw(json['price']);
   // }
 
-//
+//This method gets
   static getAmazonProductsList(Map<String, dynamic> json) async {
     Product temp;
-    //Forlopp which traverses through the
+    //Forloop which traverses through the JSON object search_results
     List searchResult = json['search_results'];
     currentProductList.clear();
 
@@ -63,9 +63,9 @@ class Product {
 
   static getWalmartProductsList(Map<String, dynamic> json) async {
     Product temp;
-    //Forlopp which traverses through the
     List searchWalmartResult = json['search_results'];
     for (int i = 0; i < searchWalmartResult.length; i++) {
+      //creates a temporary product which is added to the currentProductList.
       temp = Product(
         "Walmart",
         getLinkFromMap(searchWalmartResult[i]['product']),
@@ -114,14 +114,19 @@ class Product {
     return "0.01";
   }
 
-//Bubble sort recursive method:
+//Bubble sort recursive method
+//This method was inspired by the presentation on recursion and also GeeksForGeeks'
+// iterative bubble sort method
   static void productsOrderTraversal(int n, List<Product> list) {
+    //base case
     if (n == 1) {
       return;
     }
     int count = 0;
     for (int i = 0; i < n - 1; i++) {
       if (double.parse(list[i].rawPrice) > double.parse(list[i + 1].rawPrice)) {
+        //when the product at index position i is greater than the next position's price,
+        //the two products swap indices.
         Product temp = list[i];
         list[i] = list[i + 1];
         list[i + 1] = temp;
@@ -131,6 +136,7 @@ class Product {
     if (count == 0) {
       return;
     }
+    //recursive call
     productsOrderTraversal(n, list);
   }
 

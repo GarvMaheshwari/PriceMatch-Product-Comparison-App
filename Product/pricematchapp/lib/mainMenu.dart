@@ -36,10 +36,12 @@ class _MainMenuState extends State<MainMenu> {
         leading: IconButton(
           icon: const Icon(CupertinoIcons.search),
           padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+          //When the search button is pressed, both the Amazon and
+          //Walmart API are called
           onPressed: () {
             String url = appendAmazonSearch(parseInput(searchMenu.text));
             String url2 = appendWalmartSearch(parseInput(searchMenu.text));
-            //edit this so it instead takes the search input from the controller
+
             Product.currentProductList.clear();
 
             fetchFromAmazonApi(Uri.parse(url));
@@ -143,6 +145,7 @@ class _MainMenuState extends State<MainMenu> {
   }
 
   //Append Search is a method that contains the API url with the key. This appends
+  //the API key and the search term which is the user input together.
   String appendAmazonSearch(List<String> searchInput) {
     String appendedURL = constants.UserStack.AmazonProductAPI + "&search_term=";
     appendedURL = "$appendedURL${searchInput[0]}";
@@ -175,6 +178,9 @@ class _MainMenuState extends State<MainMenu> {
     return appendedURL;
   }
 
+// the fetchFromAmazonApi method is the asynchronous method that makes the
+// http call to the API when the button is pressed. This function is also
+// responsible for the loading screen.
   void fetchFromAmazonApi(Uri url) async {
     setState(() {
       MainMenu._isLoadingData = true;

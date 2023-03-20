@@ -54,26 +54,6 @@ class SignUp extends StatelessWidget {
                               errorMessage: "Name",
                               name: CupertinoIcons.person,
                             ),
-
-                            // child: TextFormField(
-                            //     controller: password,
-                            //     obscureText: true,
-                            //     // validator: (String value) {
-                            //     //   if (value.isEmpty) {
-                            //     //     return "Invalid Password";
-                            //     //   }
-                            //     //   return null;
-                            //     // },
-                            //     decoration: InputDecoration(
-                            //       prefixIcon:
-                            //           Icon(CupertinoIcons.lock_fill),
-                            //       hintText: "password",
-                            //       contentPadding: EdgeInsets.all(10.0),
-                            //       border: OutlineInputBorder(
-                            //         borderRadius:
-                            //             BorderRadius.circular(25),
-                            //       ),
-                            //     ),)
                           ),
                           const SizedBox(height: 20.0),
                           //Password field

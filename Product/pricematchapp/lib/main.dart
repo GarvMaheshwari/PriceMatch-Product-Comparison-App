@@ -48,7 +48,7 @@ class Login extends StatelessWidget {
                             children: [
                               Container(
                                 width: 400,
-                                //Username field:
+                                //Email field:
                                 child: constants.customTextFormField(
                                     controller: username,
                                     hintText: "email",
@@ -56,7 +56,8 @@ class Login extends StatelessWidget {
                                     name: Icons.mail),
                               ),
                               SizedBox(height: 20.0),
-                              //Password field
+                              //Password field - made use of a textformfield instead of custom
+                              //in order to enable obscure text
                               Container(
                                   width: 400,
                                   child: TextFormField(
@@ -77,14 +78,7 @@ class Login extends StatelessWidget {
                                   onPressed: () async {
                                     firebaseAuth.loginUser(
                                         username.text, password.text, context);
-                                    // if (_userFormKey.currentState
-                                    //     .validate()) {
-                                    //   //Calls login method created in Auth_Service
-                                    //   viewModel.loginauth.loginUser(
-                                    //       username.text, password.text);
-                                    // }
                                   },
-                                  // onPressed:viewModel.loginButton,
                                   child: const Text(
                                     'Log-in',
                                   ),
@@ -103,6 +97,7 @@ class Login extends StatelessWidget {
                                         style: TextStyle(
                                           color: Color.fromRGBO(24, 94, 131, 1),
                                         ),
+                                        //On tap routes to the signup page.
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             Navigator.pushNamed(
