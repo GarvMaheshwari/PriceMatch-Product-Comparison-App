@@ -44,6 +44,8 @@ class Product {
     //Forlopp which traverses through the
     List searchResult = json['search_results'];
     currentProductList.clear();
+
+    //populates a list with all the products retrieved from the search
     for (int i = 0; i < searchResult.length; i++) {
       temp = Product(
         "Amazon",
@@ -56,6 +58,7 @@ class Product {
         currentProductList.add(temp);
       }
     }
+    productsOrderTraversal(currentProductList.length, currentProductList);
   }
 
   static getWalmartProductsList(Map<String, dynamic> json) async {
@@ -74,6 +77,8 @@ class Product {
         currentProductList.add(temp);
       }
     }
+    //calls the bubble sort method to rearrange Products to be in price
+    //ascending order
     productsOrderTraversal(currentProductList.length, currentProductList);
     printProductList();
   }

@@ -1,8 +1,4 @@
-import 'dart:html';
-import 'dart:js_util';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart' as constants;
 

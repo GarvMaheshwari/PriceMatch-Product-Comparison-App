@@ -40,6 +40,8 @@ class _MainMenuState extends State<MainMenu> {
             String url = appendAmazonSearch(parseInput(searchMenu.text));
             String url2 = appendWalmartSearch(parseInput(searchMenu.text));
             //edit this so it instead takes the search input from the controller
+            Product.currentProductList.clear();
+
             fetchFromAmazonApi(Uri.parse(url));
             fetchFromWalmartApi(Uri.parse(url2));
           },
@@ -54,42 +56,79 @@ class _MainMenuState extends State<MainMenu> {
           : Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 100),
                 Expanded(
                   child: Container(
-                    width: 800,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
                     alignment: Alignment.center,
                     child: ListView.builder(
                         itemCount: Product.currentProductList.length,
                         itemBuilder: (context, i) {
                           final product = Product.currentProductList[i];
-                          return Card(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 10),
-                            child: Stack(
-                              children: [
-                                Image.network(
-                                  product.image,
-                                  height: 200,
-                                  width: 200,
+                          return Row(
+                            children: [
+                              Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(200, 20, 20, 20),
+                                child: Card(
+                                  child: Image.network(
+                                    product.image,
+                                    height: 200,
+                                    width: 200,
+                                  ),
                                 ),
-                                ListTile(
-                                    title: Text(
-                                      "Retailer\n${product.brand} \n\$${product.rawPrice}",
-                                      textAlign: TextAlign.right,
+                              ),
+                              Expanded(
+                                  child: Container(
+                                width: 700,
+                                height: 200,
+                                margin:
+                                    const EdgeInsets.fromLTRB(20, 20, 200, 20),
+                                alignment: Alignment.centerRight,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color.fromARGB(158, 7, 135, 255),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const Align(alignment: Alignment.center),
+                                    const SizedBox(height: 30),
+                                    Text(
+                                      product.brand,
+                                      style: const TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 255, 159, 42),
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                    subtitle: RichText(
-                                      textAlign: TextAlign.right,
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      "\$${product.rawPrice}",
+                                      style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    RichText(
+                                      textAlign: TextAlign.center,
                                       text: TextSpan(
-                                          text: "Link to Retail Website",
+                                          style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 18, 47, 9),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                          text: "Visit Retail Website",
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () async {
                                               await launchUrl(
                                                   Uri.parse(product.link));
                                             }),
-                                    )),
-                              ],
-                            ),
+                                    ),
+                                  ],
+                                ),
+                              )),
+                            ],
                           );
                         }),
                   ),
@@ -144,7 +183,6 @@ class _MainMenuState extends State<MainMenu> {
     String data = response.body;
     MainMenu.json.addAll(jsonDecode(data));
     setState(() {
-      MainMenu._isLoadingData = false;
       Product.getAmazonProductsList(MainMenu.json);
     });
   }
@@ -157,8 +195,8 @@ class _MainMenuState extends State<MainMenu> {
     String data = response.body;
     MainMenu.json2.addAll(jsonDecode(data));
     setState(() {
-      MainMenu._isLoadingData = false;
       Product.getWalmartProductsList(MainMenu.json2);
+      MainMenu._isLoadingData = false;
     });
   }
 }
