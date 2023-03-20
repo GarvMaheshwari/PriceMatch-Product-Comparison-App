@@ -33,7 +33,7 @@ class Login extends StatelessWidget {
               toolbarHeight: 60,
               automaticallyImplyLeading: false,
               backgroundColor: Color(0xFF185E83),
-              title: Text("Welcome"),
+              title: Text("Welcome to PriceMatch"),
             ),
             body: Container(
                 height: double.infinity,
@@ -58,34 +58,20 @@ class Login extends StatelessWidget {
                               SizedBox(height: 20.0),
                               //Password field
                               Container(
-                                width: 400,
-                                child: constants.customTextFormField(
-                                  controller: password,
-                                  hintText: "password",
-                                  errorMessage: "Incorrect Password",
-                                  name: CupertinoIcons.lock_fill,
-                                ),
-
-                                // child: TextFormField(
-                                //     controller: password,
-                                //     obscureText: true,
-                                //     // validator: (String value) {
-                                //     //   if (value.isEmpty) {
-                                //     //     return "Invalid Password";
-                                //     //   }
-                                //     //   return null;
-                                //     // },
-                                //     decoration: InputDecoration(
-                                //       prefixIcon:
-                                //           Icon(CupertinoIcons.lock_fill),
-                                //       hintText: "password",
-                                //       contentPadding: EdgeInsets.all(10.0),
-                                //       border: OutlineInputBorder(
-                                //         borderRadius:
-                                //             BorderRadius.circular(25),
-                                //       ),
-                                //     ),)
-                              ),
+                                  width: 400,
+                                  child: TextFormField(
+                                    controller: password,
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      prefixIcon:
+                                          Icon(CupertinoIcons.lock_fill),
+                                      hintText: "password",
+                                      contentPadding: EdgeInsets.all(10.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                    ),
+                                  )),
                               SizedBox(height: 10.0),
                               CupertinoButton(
                                   onPressed: () async {
